@@ -8,6 +8,10 @@ const variationSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  image:{
+    type:String,
+    required:true
+  },
   stock: {
     type: Number,
     required: true,
@@ -28,24 +32,25 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  image:{
+    type:String,
+  },
   stock: {
     type: Number,
-    require: () => {
-      return this.variations.length === 0;
-    },
+    default: 0,
   },
-  catgeories: [
+  categories: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Catgeory",
+      ref: "Category",
     },
   ],
-  variations:[variationSchema],
-  createdAt:{
+  variations: [variationSchema],
+  createdAt: {
     type: Date,
     default: Date.now,
-  }
+  },
 });
 
-const Product = mongoose.model('Product', productSchema)
+const Product = mongoose.model("Product", productSchema);
 module.exports = Product;
