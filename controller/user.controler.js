@@ -1,4 +1,8 @@
 const User = require("../models/user.model");
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+require('dotenv').config();
+
 
 const registerUser = async (req, res) => {
   const { email, password, role } = req.body;
@@ -12,10 +16,10 @@ const registerUser = async (req, res) => {
     const newUser = new User({ email, password, role });
     await newUser.save();
 
-    res.status(200).json({ message: "User registred successfully" });
-  } catch (error) {
+    res.status(200).json({ message: "User registered successfully" });
+  } catch (error) { 
     console.error(error);
-    res.status(500).json({ message: "Server error", error });
+    res.status(500).json({ message: "Server error" });
   }
 };
 
@@ -49,13 +53,10 @@ const loginUser = async (req, res) => {
         role: user.role,
       },
     });
-  } catch (error) 
-  {
+  } catch (error) {
     console.error(error);
-    res.status(500).json({message:"Server error", error})
-    
+    res.status(500).json({ message: "Server error", error });
   }
 };
 
-
-module.exports = {registerUser, loginUser}
+module.exports = { registerUser, loginUser };
