@@ -26,7 +26,6 @@ const productSchema = new mongoose.Schema({
   },
   generalPrice: {
     type: Number,
-    required: true,
   },
   description: {
     type: String,
@@ -34,9 +33,11 @@ const productSchema = new mongoose.Schema({
   },
   image:{
     type:String,
+    required: true,
   },
   stock: {
     type: Number,
+    required: true,
     default: 0,
   },
   categories: [

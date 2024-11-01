@@ -1,11 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const userRoute = require("./route/user.route");
-const categoryRoute = require("./route/category.route")
-const productRoute = require("./route/product route")
+const categoryRoute = require("./route/category.route");
+const productRoute = require("./route/product route");
+const cartRoute = require("./route/cart.route");
 const cors = require("cors");
-// require("dotenv").config();
-
 const app = express();
 
 app.use(cors());
@@ -15,6 +14,7 @@ app.use(express.json());
 app.use("/api/users", userRoute);
 app.use("/api/category", categoryRoute);
 app.use("/api/product", productRoute);
+app.use("/api/cart", cartRoute);
 
 mongoose
   .connect(
