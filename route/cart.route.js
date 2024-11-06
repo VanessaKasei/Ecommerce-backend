@@ -8,6 +8,6 @@ const {
 
 router.get("/:userId", getCart);
 router.delete("/:userId", clearCart);
-router.post("/:userId/checkout", postCart);
+router.post("/checkout", postCart);
 
 module.exports = router;

@@ -4,6 +4,7 @@ const userRoute = require("./route/user.route");
 const categoryRoute = require("./route/category.route");
 const productRoute = require("./route/product route");
 const cartRoute = require("./route/cart.route");
+const orderRoutes = require("./route/order.route")
 const cors = require("cors");
 const app = express();
 
@@ -15,6 +16,7 @@ app.use("/api/users", userRoute);
 app.use("/api/category", categoryRoute);
 app.use("/api/product", productRoute);
 app.use("/api/cart", cartRoute);
+app.use('/api/orders', orderRoutes);
 
 mongoose
   .connect(
