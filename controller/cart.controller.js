@@ -20,13 +20,15 @@ const clearCart = async (req, res) => {
 
 const postCart = async (req, res) => {
   try {
-    const { userId, cartItems } = req.body; 
+    const { userId, cartItems } = req.body;
 
     if (!userId) {
-      return res.status(400).json({ message: 'User ID is required' });
+      return res.status(400).json({ message: "User ID is required" });
     }
     if (!cartItems || !Array.isArray(cartItems)) {
-      return res.status(400).json({ message: 'Cart items must be provided as an array' });
+      return res
+        .status(400)
+        .json({ message: "Cart items must be provided as an array" });
     }
 
     // Find the cart by userId or create a new one if it doesn't exist
@@ -34,27 +36,32 @@ const postCart = async (req, res) => {
 
     if (!cart) {
       // If cart doesn't exist, create a new cart
-      cart = new Cart({ userId, cartItems });
+      cart = new Cart({
+        userId,
+        cartItems: cartItems.map((item) => ({
+          _id: item._id,
+          name: item.name,
+          price: item.price,
+          image: item.image,
+          variationId: item.variationId || null,
+          quantity: item.quantity,
+          variationDetails: item.variationDetails || null, 
+        })),
+      });
     } else {
-      // If cart exists, update the cart items
       cart.cartItems = cartItems; // merge them
     }
-
-    // Save the cart to the database
     await cart.save();
 
-    res.status(200).json(cart); 
+    res.status(200).json(cart);
   } catch (error) {
-    console.error(error); 
-    res.status(500).json({ message: 'Server error' });
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
   }
 };
 
-
-
-
 module.exports = {
-    getCart,
-    clearCart,
-    postCart
-}
+  getCart,
+  clearCart,
+  postCart,
+};

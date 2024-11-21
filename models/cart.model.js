@@ -19,10 +19,14 @@ const cartItemSchema = new mongoose.Schema({
   },
   variationId: {
     type: String,
-    required: true,
+    required: false,
+  },
+  variationDetails: {
+    type: Object,  
+    default: {},
   },
   quantity: {
-    type: String,
+    type: Number,
     required: true,
     default: 1,
   },
@@ -36,5 +40,6 @@ const cartSchema = new mongoose.Schema({
   },
   cartItems: [cartItemSchema],
 });
+
 
 module.exports = mongoose.model('Cart', cartSchema)

@@ -47,13 +47,20 @@ const getSingleProduct = async (req, res) => {
 
 const editProduct = async (req, res) => {
   try {
-    const product = await Product.findByIdAndUpdate(req.params.id, req.body, {new: true});
+    const { _id, ...updateData } = req.body;
+    const product = await Product.findByIdAndUpdate(
+      req.params.id, 
+      updateData,     
+      { new: true }   
+    );
+
     if (!product) {
-      return res.status(404).json({ message: "product not found" });
+      return res.status(404).json({ message: "Product not found" });
     }
-    const updatedProducts = await Product.findById(req.params.id);
-    res.status(200).json(updatedProducts);
+
+    res.status(200).json(product);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ message: error.message });
   }
 };
