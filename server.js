@@ -8,7 +8,11 @@ const orderRoutes = require("./route/order.route")
 const cors = require("cors");
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: 'http://84.247.137.154:8080',  // Frontend URL and port
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow methods as needed
+  allowedHeaders: ['Content-Type', 'Authorization'], // Allow these headers
+}));
 
 app.use(express.json());
 
