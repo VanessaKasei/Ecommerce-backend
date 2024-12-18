@@ -9,9 +9,9 @@ const cors = require("cors");
 const app = express();
 
 app.use(cors({
-  origin: 'http://84.247.137.154:8080',  // Frontend URL and port
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow methods as needed
-  allowedHeaders: ['Content-Type', 'Authorization'], // Allow these headers
+  origin: 'http://84.247.137.154:8085',  
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], 
+  allowedHeaders: ['Content-Type', 'Authorization'], 
 }));
 
 app.use(express.json());
