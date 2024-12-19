@@ -21,11 +21,15 @@ app.use(cors({
 
 app.use(express.json());
 
+//these are my routes
+
+
 app.use("/api/users", userRoute);
 app.use("/api/category", categoryRoute);
 app.use("/api/product", productRoute);
 app.use("/api/cart", cartRoute);
 app.use('/api/orders', orderRoutes);
+
 
 mongoose
   .connect(
