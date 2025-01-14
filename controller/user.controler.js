@@ -1,7 +1,8 @@
+require('dotenv').config();
+
 const User = require("../models/user.model");
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-require('dotenv').config();
 
 const registerUser = async (req, res) => {
   const { email, password, role } = req.body;
@@ -44,6 +45,9 @@ const loginUser = async (req, res) => {
     }
 
     console.log("Password matches, generating token...");
+    if (!process.env.JWT_SECRET) {
+      return res.status(500).json({ error: 'JWT_SECRET is not defined.' });
+    }
     const token = jwt.sign(
       {
         userId: user._id,
