@@ -29,10 +29,13 @@ const loginUser = async (req, res) => {
   try {
     const user = await User.findOne({ email });
     if (!user) {
+      console.error(`Login failed: No user found with email ${email}`);
       return res.status(400).json({ message: "Invalid credentials" });
     }
+
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
+      console.error(`Login failed: Incorrect password for email ${email}`);
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
@@ -44,6 +47,8 @@ const loginUser = async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
+
+    console.log(`Login successful for user: ${email}`);
     res.status(200).json({
       message: "Login successful",
       token,
@@ -54,9 +59,10 @@ const loginUser = async (req, res) => {
       },
     });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Server error", error });
+    console.error("Error during login:", error);
+    res.status(500).json({ message: "Server error", error: error.message });
   }
 };
+
 
 module.exports = { registerUser, loginUser };
