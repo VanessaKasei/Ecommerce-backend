@@ -46,7 +46,7 @@ const loginUser = async (req, res) => {
     console.log(`Plain password: ${password}`);
     console.log(`Stored hashed password: ${user.password}`);
     console.log(`Password match result: ${isMatch}`);
-        if (!isMatch) {
+    if (!isMatch) {
       console.error(`Login failed: Incorrect password for email ${email}`);
       return res.status(400).json({ message: "Invalid credentials" });
     }
@@ -55,6 +55,7 @@ const loginUser = async (req, res) => {
     if (!process.env.JWT_SECRET) {
       return res.status(500).json({ error: 'JWT_SECRET is not defined.' });
     }
+    console.log("JWT_SECRET:", process.env.JWT_SECRET);
     const token = jwt.sign(
       {
         userId: user._id,
