@@ -15,9 +15,11 @@ const registerUser = async (req, res) => {
 
     // Hash the password before saving it
     const hashedPassword = await bcrypt.hash(password, 10);
+    console.log('Hashed password during registration:', hashedPassword);
 
     const newUser = new User({ email, password: hashedPassword, role });
     await newUser.save();
+    console.log('User saved to database:', newUser);
 
     res.status(200).json({ message: "User registered successfully" });
   } catch (error) {
@@ -38,8 +40,13 @@ const loginUser = async (req, res) => {
     }
 
     console.log(`Found user: ${user.email}`);
+    console.log('user.password', user.password);
+
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
+    console.log(`Plain password: ${password}`);
+    console.log(`Stored hashed password: ${user.password}`);
+    console.log(`Password match result: ${isMatch}`);
+        if (!isMatch) {
       console.error(`Login failed: Incorrect password for email ${email}`);
       return res.status(400).json({ message: "Invalid credentials" });
     }
