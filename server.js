@@ -3,19 +3,20 @@ const express = require("express");
 const mongoose = require("mongoose");
 const userRoute = require("./route/user.route");
 const categoryRoute = require("./route/category.route");
-const productRoute = require("./route/product route");
+const productRoute = require("./route/product.route");
 const cartRoute = require("./route/cart.route");
 const orderRoutes = require("./route/order.route")
 const cors = require("cors");
 const app = express();
-
+const mongoURI = process.env.MONGO_URI;
 app.use(cors({
   // origin: [
-  //   'http://84.247.137.154:8085', 
-  //   'http://localhost:3000'       
+  // 'http://84.247.137.154:8085', 
+  // 'http://localhost:3000'       
   // ],
-  origin: '*',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], 
+  origin: ['https://commercecore.andsons.co.ke', 'http://84.247.137.154:8085',
+    'http://localhost:3000'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
@@ -34,7 +35,7 @@ app.use('/api/orders', orderRoutes);
 
 mongoose
   .connect(
-    "mongodb+srv://Vanessa:q2zmYzd3sffk@ecommerce.wnfkn.mongodb.net/Ecommerce?retryWrites=true&w=majority"
+    mongoURI
   )
   .then(() => {
     console.log("Connected to the database");
