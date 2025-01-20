@@ -8,7 +8,6 @@ const cartRoute = require("./route/cart.route");
 const orderRoutes = require("./route/order.route")
 const cors = require("cors");
 const app = express();
-const mongoURI = process.env.MONGO_URI;
 app.use(cors({
   // origin: [
   // 'http://84.247.137.154:8085', 
@@ -35,7 +34,7 @@ app.use('/api/orders', orderRoutes);
 
 mongoose
   .connect(
-    mongoURI
+    "mongodb+srv://Vanessa:q2zmYzd3sffk@ecommerce.wnfkn.mongodb.net/Ecommerce?retryWrites=true&w=majority"
   )
   .then(() => {
     console.log("Connected to the database");
