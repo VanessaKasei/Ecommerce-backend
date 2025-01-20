@@ -14,7 +14,7 @@ app.use(cors({
   // 'http://84.247.137.154:8085', 
   // 'http://localhost:3000'       
   // ],
-  origin: ['https://commercecore.andsons.co.ke', 'http://84.247.137.154:8085',
+  origin: ['https://bestseller.andsons.co.ke', 'http://84.247.137.154:8085',
     'http://localhost:3000'],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
