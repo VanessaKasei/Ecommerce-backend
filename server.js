@@ -35,7 +35,7 @@ app.use('/api/orders', orderRoutes);
 mongoose
   .connect(
     "mongodb+srv://Vanessa:q2zmYzd3sffk@ecommerce.wnfkn.mongodb.net/Ecommerce?retryWrites=true&w=majority"
-  )
+    )
   .then(() => {
     console.log("Connected to the database");
     app.listen(5000, () => {
